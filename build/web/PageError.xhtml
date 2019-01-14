@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <h:outputScript name="js/jquery-3.3.1.min.js" library="theme1"/>
+    <h:outputScript name="js/bootstrap.min.js" library="theme1"/>
+    <h:outputStylesheet name="css/bootstrap.min.css" library="theme1"/>
+    
+    
+    <title>Biaster</title>
+
+    <h:head>
+
+        <link href="resources/theme1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+
+    <h:body>
+
+        <br/><br/>
+        <div class="container">
+            <div align="center" class="panel panel-primary" style=" height: 200px; font-size: 20px;">
+                <br/>
+            <P   class="text-primary">Lo sentimos se ha producido un error, Regrese a la pagina anterior y actulice la página</P>
+            <br/> <br/>
+            <a class="btn btn-success" href="http://190.235.138.47:8086/Biaster/faces/menu.xhtml"> Regresar</a>
+            </div>
+            
+        </div>
+        <h:form>
+            <h:commandLink value="Regresar" action="#{loginBean.volvererror()}" />
+        </h:form>
+
+
+    </h:body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./matriz.xhtml">
+
+            <ui:define name="content">
+
+                <f:event type="preRenderComponent"   listener="#{verdetalleBean.buscardetalle()}"/>
+                <h1 align="center">Detalle de Contrato</h1>
+
+                <div class="panel panel-primary col-lg-4">
+<br/>
+                    <p class=" text-primary">RUC:   #{verdetalleBean.contrato.codigocliente.ruc}</p>
+                    <p class=" text-primary">RAZON SOCIAL:   #{verdetalleBean.contrato.codigocliente.apellidosrazonsocial}</p>
+                    <p class="text-primary">Nº FACTURA:   #{verdetalleBean.contrato.numfactura}                          </p>
+
+
+                    <p class="text-primary">FECHA:   #{verdetalleBean.contrato.fecha}</p>
+                    <p class="text-primary"> TOTAL:   #{verdetalleBean.contrato.total}</p>
+                    <p class=" text-primary">PAGADO:  #{verdetalleBean.contrato.pagadocadena}</p>
+
+                    <p class=" text-primary">SALDO:   #{verdetalleBean.contrato.saldo}</p>
+                    <p class=" text-primary">DETALLE:  #{verdetalleBean.contrato.detalle}</p>
+                    <hr/>
+                </div>
+                <div class="col-lg-8">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>CANT</th>
+                            <th>DESCRIPCIÓN</th> 
+                            <th>P. UNIT S/ </th>
+                            <th>TOTAL S/ </th>
+                            <th>Otros </th>
+                        </tr>
+                        <c:forEach  items="${verdetalleBean.lstdetalle}"  var="item">
+                            <tr>
+                         <td>  <p class="text-primary">${item.cantidad.toString()}         </p>         </td>
+                         <td>  <p class="text-primary"> ${item.producto.toString()}         </p>     </td>
+                         <td>  <p class="text-primary">  ${String.valueOff( item.getPrecio) } </p></td>
+                         <td>  <p class="text-primary"> ${item.total.toString()}         </p>     </td>
+                         <td>  <p class="text-primary">   ${item.otro.toString()}         </p>    </td>
+  
+</tr>
+
+                        </c:forEach>
+                    </table>
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

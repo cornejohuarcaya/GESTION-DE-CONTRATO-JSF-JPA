@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body >
+        <ui:composition template="./matriz.xhtml">
+            <ui:define name="content">
+                <div class="container">
+
+                    <h:form id="formregistro">
+                        <b:panel col-md="12" look="primary"  title="Registrar Contratos">
+
+                            <b:row>
+                                <b:inputText id="codigo" col-md="1" value="#{contratoBean.cliente.codigo}" label="Codigo" readonly="true"/>
+
+                                <b:inputText id="ruc" col-md="2" value="#{contratoBean.cliente.ruc}" label="Ruc" readonly="true" />
+
+                                <b:inputText id="apellidosrazonsocial" col-md="5" readonly="true" value="#{contratoBean.cliente.apellidosrazonsocial}" label="Apellidosrazonsocial" />
+
+
+                                <b:button onclick="$('.formValidationModalClass').modal('show')" value="Buscar Cliente" look="success"/>
+
+                                <b:commandButton value="Guardar" look="primary" actionListener="#{contratoBean.registrar()}" update="formregistro frmtabla:tabla msj" />
+
+                            </b:row>
+                            <b:row>
+                                <b:inputText id="detalle" col-md="12" value="#{contratoBean.contrato.detalle}" label="Detalle Contrato" />
+                            </b:row>
+
+
+                            <b:column col-md="4">
+                                <b:inputText id="otro" col-md="6" value="#{contratoBean.detallecontrato.otro}" label="Otro" />
+                                <b:inputText id="cantidad" col-md="6" value="#{contratoBean.detallecontrato.cantidad}" label="Cantidad" />
+                                <b:inputText id="precio" col-md="6" value="#{contratoBean.detallecontrato.precio}" label="Precio" />
+                                <b:inputText id="total" col-md="6" value="#{contratoBean.detallecontrato.total}" label="Total" />
+                            </b:column>
+                            <b:column col-md="8">
+                                <b:inputTextarea id="producto" value="#{contratoBean.detallecontrato.producto}" label="Producto" />
+                                <b:commandButton  col-md="3" value="Agregar" look="primary" actionListener="#{contratoBean.agregar()}" update="formregistro frmtabla  frmtabla:tabla msj" >
+                                    <b:iconAwesome value="fa-save" />
+                                </b:commandButton>
+                            </b:column>
+
+
+                        </b:panel>
+
+                    </h:form>
+
+
+                    <h:form id="frmtabla">
+
+                        <b:dataTable id="tabla" paginated="false" searching="false" value="#{contratoBean.lstdetalle}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Codigo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.codigo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Producto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.producto}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cantidad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cantidad}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Precio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.precio}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Total"/>
+                                </f:facet>
+                                <h:outputText value="#{item.total}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Otro"/>
+                                </f:facet>
+                                <h:outputText value="#{item.otro}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="">
+                                    <h:outputText value="Codigocontrato"/>
+                                </f:facet>
+                                <b:commandButton size="xs" look="danger"
+                                                 value="Eliminar" action="#{contratoBean.quitar(item)}"  ajax="true"  
+                                                 update="frmtabla"
+                                                 />
+                            </h:column>
+                        </b:dataTable>
+                        <b:label offset-md="8" value="Total S/ " />
+                        <b:inputText id="total" offset-md="8" readonly="true" value="#{contratoBean.contrato.total}"/>
+                    </h:form>
+
+
+                </div>
+
+
+
+                <b:modal title="Seleccionar Cliente" styleClass="formValidationModalClass" >
+                    <h:form>
+                        <b:dataTable responsive="true"  value="#{clienteBean.lstcliente}" var="item">       
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Codigo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.codigo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ruc"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ruc}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Apellidosrazonsocial"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellidosrazonsocial}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <b:commandButton size="xs" look="success"
+                                                 onclick="$('.formValidationModalClass').modal('hide')" 
+                                                 value="seleccionar" action="#{contratoBean.seleccionarcliente(item)}"  ajax="true"  
+                                                 update="formpedido"
+                                                 >
+                                    <f:ajax render="formregistro" execute="@this"></f:ajax>
+                                </b:commandButton>
+                            </h:column>
+                        </b:dataTable>
+                    </h:form>
+                    <f:facet name="footer">
+                        <b:button value="Close" dismiss="modal" />
+                        <b:button value="Ok" look="primary" dismiss="modal" />
+                    </f:facet>
+                </b:modal>
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

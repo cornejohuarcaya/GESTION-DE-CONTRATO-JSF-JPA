@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body >
+        <ui:composition template="./matriz.xhtml">
+            <ui:define name="content">
+                <div class="container">
+
+                    <h:form id="formregistro">
+                            <b:panel col-md="12" look="info" title="Modificar mis datos">
+
+                            <f:view>
+
+
+                                <h:form>
+                                    
+                                    <h:panelGrid columns="2">
+                                        
+                                        
+                                        <h:outputLabel value="Usuario:" for="usuario" />
+                                        <b:inputText id="usuario" value="#{micuentaBean.usuario.usuario}" title="Usuario"  required="true" requiredMessage="El campo Usuario es requerido" />
+                                        <h:outputLabel value="Password:" for="password" />
+                                        <b:inputSecret id="password" value="#{micuentaBean.usuario.password}" title="Password"  required="true" requiredMessage="El campo Password es requerido" />
+                                        <h:outputLabel value="Confirmación de Password:" for="password" />
+                                        <b:inputSecret id="password2" value="#{micuentaBean.confirmacionpassword}" title="Confirmación de Password"  required="true" requiredMessage="El campo Password de confirmación es requerido" />
+                                        <h:outputLabel value="Apellidosnombres:" for="apellidosnombres" />
+                                        <b:inputText id="apellidosnombres" value="#{micuentaBean.usuario.apellidosnombres}" title="Apellidosnombres" />
+
+                                        <h:outputLabel value="Correo:" for="correo" />
+                                        <b:inputText id="correo" value="#{micuentaBean.usuario.correo}" title="Correo" />
+                                        <h:outputLabel value="Dni:" for="dni" />
+                                        <b:inputText id="dni" value="#{micuentaBean.usuario.dni}" title="Dni" />
+                                        <h:outputLabel value="Celular:" for="celular" />
+                                        <b:inputText id="celular" value="#{micuentaBean.usuario.celular}" title="Celular" />
+                                        <h:inputHidden id="codigo" value="#{micuentaBean.usuario.codigo}" />
+                                    </h:panelGrid>
+                                </h:form>
+                            </f:view>
+
+                            
+                            
+                            
+                                <b:commandButton value="Guardar" look="primary" offset-md="2" col-md="2" actionListener="#{micuentaBean.actualizar()}" update="formregistro msj" />
+                            
+
+                        </b:panel>
+
+                    </h:form>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

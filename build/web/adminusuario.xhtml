@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body >
+        <ui:composition template="./matriz.xhtml">
+            <ui:define name="content">
+                <div class="container">
+
+                            <h:form id="formregistro">
+                                <b:panel col-md="12" look="primary" collapsed="true" title="Registrar Cliente">
+                                <h:panelGrid  columns="4">
+                                    <b:inputText id="ruc" value="#{clienteBean.cliente.ruc}" title="Ruc" label="Ruc" />
+                                    <b:inputText id="apellidosrazonsocial" value="#{clienteBean.cliente.apellidosrazonsocial}" label="Apellidos Razon Social" />
+                                    <b:inputText id="nombrecomercial" value="#{clienteBean.cliente.nombrecomercial}" label="Nombre Comercial" />                                    
+                                    <b:inputText id="direccion" value="#{clienteBean.cliente.direccion}" label="Direccion" />
+                                    <b:inputText id="correo1" value="#{clienteBean.cliente.correo1}" label="Correo1" />
+                                    <b:inputText id="correo2" value="#{clienteBean.cliente.correo2}" label="Correo2" />
+                                    <b:inputText id="telefono1" value="#{clienteBean.cliente.telefono1}" label="Telefono1" />
+                                    <b:inputText id="celular1" value="#{clienteBean.cliente.celular1}" label="Celular1" />
+                                    <b:inputText id="nombrecontacto" value="#{clienteBean.cliente.nombrecontacto}" label="Nombrecontacto" />
+                                    <b:inputText id="celularcontacto" value="#{clienteBean.cliente.celularcontacto}" label="Celularcontacto" />
+                                    <b:inputText id="otros" value="#{clienteBean.cliente.otros}" label="Otros" />
+                                    
+                                    <b:commandButton value="Guardar" look="primary" actionListener="#{clienteBean.registrar()}" update="formregistro frmtabla:tabla msj" />
+                                    <b:inputText hidden="lg,md,sm,xs" id="codigo" value="#{clienteBean.cliente.codigo}" />
+                                </h:panelGrid>
+                                
+                                </b:panel>
+
+                            </h:form>
+                
+                      
+                            <h:form id="frmtabla">
+                                <b:dataTable col-md="20" id="tabla" multiColumnSearch="true" column-visibility="true" responsive="true" value="#{clienteBean.lstcliente}"  var="item">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Codigo"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codigo}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Ruc"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.ruc}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Apellidosrazonsocial"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.apellidosrazonsocial}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombrecomercial"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombrecomercial}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Direccion"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.direccion}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Correo1"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.correo1}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Correo2"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.correo2}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Telefono1"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.telefono1}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Celular1"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.celular1}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Nombrecontacto"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nombrecontacto}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Celularcontacto"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.celularcontacto}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Otros"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.otros}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name=" ">
+                                            <h:outputText value="Otros"/>
+                                        </f:facet>
+                                        <b:commandButton value="" look="success" class="glyphicon glyphicon-pencil" actionListener="#{clienteBean.seleccionar(item)}" update="formregistro"/>
+                                        <b:commandButton value="" look="danger" class="glyphicon glyphicon-trash" actionListener="#{clienteBean.eliminar(item.codigo)}" onclick="return confirm('¿Esta seguro que desea eliminar?')">
+                                            <f:ajax  execute="@this" render=" frmtabla "/>
+                                        </b:commandButton>
+                                    </h:column>
+                                </b:dataTable>
+                            </h:form>
+
+                  
+                    </div>
+
+
+
+
+
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
